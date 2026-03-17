@@ -1,10 +1,62 @@
 # HMCTS Dev Test Backend
-This will be the backend for the brand new HMCTS case management system. As a potential candidate we are leaving
-this in your hands. Please refer to the brief for the complete list of tasks! Complete as much as you can and be
-as creative as you want.
 
-You should be able to run `./gradlew build` to start with to ensure it builds successfully. Then from that you
-can run the service in IntelliJ (or your IDE of choice) or however you normally would.
+Backend API for the HMCTS case management technical test. This service provides a REST API for managing caseworker tasks, including persistence, validation, error handling, and API documentation.
 
-There is an example endpoint provided to retrieve an example of a case. You are free to add/remove fields as you
-wish.
+## Overview
+
+This backend exposes a task management API for caseworkers. It supports the full task lifecycle, persists data to a database, applies validation rules, and provides interactive API documentation via Swagger UI.
+
+## Features
+
+- Create a task with:
+  - title
+  - optional description
+  - status
+  - due date and time
+- Retrieve a task by ID
+- Retrieve all tasks, sorted by due date and time
+- Update a task
+- Update task status only
+- Delete a task
+- Validation with `400 Bad Request` responses
+- Consistent error responses using `ProblemDetail`
+- Database persistence with Flyway migrations
+- H2 database by default, with optional Postgres profile
+
+## Tech Stack
+
+- **Java 21** (Temurin / OpenJDK)
+- **Spring Boot**
+- **Spring Data JPA**
+- **Hibernate**
+- **Flyway** for database migrations
+- **H2** database for default local development
+- **OpenAPI / Swagger UI** via `springdoc`
+- **JUnit 5** and **MockMvc** for testing
+
+## Prerequisites
+
+- **Java:** 21.x
+- **Gradle:** use the included wrapper:
+  - `./gradlew`
+  - `gradlew.bat`
+
+## Configuration
+
+The service runs on:
+
+- `http://localhost:4000`
+
+### Profiles
+
+- `h2` — default
+- `postgres` — optional
+
+By default, the application uses an in-memory H2 database for local development.
+
+## Getting Started
+
+### 1. Build the application
+
+```bash
+./gradlew build
